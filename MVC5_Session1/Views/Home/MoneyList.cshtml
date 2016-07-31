@@ -1,4 +1,6 @@
-﻿<div class="row">
+﻿@using MVC5_Session1.Models
+@model List<MoneyRecordViewModel>
+<div class="row">
     <div class="col-md-12">
         <table class="table table-bordered table-hover">
             <tr>
@@ -7,24 +9,29 @@
                 <th>日期</th>
                 <th>金額</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>支出</td>
-                <td>2016-01-01</td>
-                <td>300</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>支出</td>
-                <td>2016-01-02</td>
-                <td>1,600</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>支出</td>
-                <td>2016-01-03</td>
-                <td>8,00</td>
-            </tr>
+            @{ 
+                int i = 0;
+            }
+            @foreach (var rec in Model)
+            {
+                i += 1;
+                <tr>
+                    <td>@i</td>
+                    <td>@getTypeName(rec.moneyType)</td>
+                    <td>@rec.createDts.ToString("yyyy-MM-dd")</td>
+                    <td>@rec.amount.ToString("#,#")</td>
+                </tr>
+            }
         </table>
     </div>
 </div>
+
+@helper getTypeName(MoneyType type)
+{
+    switch (type)
+    {
+        case MoneyType.Income:<text>收入</text>break;
+        case MoneyType.Pay:<text>支出</text>break;
+        default:<text>--</text>break;
+    }
+}
