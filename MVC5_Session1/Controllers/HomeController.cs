@@ -26,7 +26,7 @@ namespace MVC5_Session1.Controllers
 
             return View();
         }
-
+        [ChildActionOnly]
         public ActionResult MoneyList()
         {
             return View();
