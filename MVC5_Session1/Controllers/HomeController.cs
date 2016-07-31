@@ -26,5 +26,10 @@ namespace MVC5_Session1.Controllers
 
             return View();
         }
+
+        public ActionResult MoneyList()
+        {
+            return View();
+        }
     }
 }
