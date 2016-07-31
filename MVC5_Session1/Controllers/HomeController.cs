@@ -30,6 +30,18 @@ namespace MVC5_Session1.Controllers
         [ChildActionOnly]
         public ActionResult MoneyList()
         {
+            //TODO:正式上線需要抓真的資料
+            //List<MoneyRecordViewModel> model = getRealData();
+            List<MoneyRecordViewModel> model = getFakeData();
+
+            return View(model);
+        }
+        /// <summary>
+        /// 開發時期View所使用的假資料
+        /// </summary>
+        /// <returns></returns>
+        private static List<MoneyRecordViewModel> getFakeData()
+        {
             var model = new List<MoneyRecordViewModel>();
             model.Add(new MoneyRecordViewModel()
             {
@@ -49,7 +61,7 @@ namespace MVC5_Session1.Controllers
                 moneyType = MoneyType.Pay,
                 createDts = DateTime.Now.AddDays(2)
             });
-            return View(model);
+            return model;
         }
     }
 }
