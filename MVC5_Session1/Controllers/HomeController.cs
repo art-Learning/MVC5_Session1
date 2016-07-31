@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC5_Session1.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,7 +30,26 @@ namespace MVC5_Session1.Controllers
         [ChildActionOnly]
         public ActionResult MoneyList()
         {
-            return View();
+            var model = new List<MoneyRecordViewModel>();
+            model.Add(new MoneyRecordViewModel()
+            {
+                amount = 300,
+                moneyType = MoneyType.Pay,
+                createDts = DateTime.Now
+            });
+            model.Add(new MoneyRecordViewModel()
+            {
+                amount = 1600,
+                moneyType = MoneyType.Pay,
+                createDts = DateTime.Now.AddDays(1)
+            });
+            model.Add(new MoneyRecordViewModel()
+            {
+                amount = 800,
+                moneyType = MoneyType.Pay,
+                createDts = DateTime.Now.AddDays(2)
+            });
+            return View(model);
         }
     }
 }
