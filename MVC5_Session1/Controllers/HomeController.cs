@@ -36,6 +36,7 @@ namespace MVC5_Session1.Controllers
         [ChildActionOnly]
         public ActionResult MoneyList()
         {
+            //TODO:未來可能要接收搜尋引擎參數進行查詢動作
             var model = _acctBookSvc.getRealData();
             return View(model);
         }
