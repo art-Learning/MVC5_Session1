@@ -1,4 +1,5 @@
 ﻿using MVC5_Session1.Models;
+using MVC5_Session1.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,12 @@ namespace MVC5_Session1.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly AcctBookSvc _acctBookSvc;
+        private readonly AcctBookSvc _acctSvc;
 
         public HomeController()
         {
-            _acctBookSvc = new AcctBookSvc();
+            var unitOfWork = new EFUnitOfWork();
+            _acctSvc = new AcctBookSvc(unitOfWork);
         }
         public ActionResult Index()
         {
@@ -37,7 +39,7 @@ namespace MVC5_Session1.Controllers
         public ActionResult MoneyList()
         {
             //TODO:未來可能要接收搜尋引擎參數進行查詢動作
-            var model = _acctBookSvc.getRealData();
+            var model = _acctSvc.getRealData();
             return View(model);
         }
     }

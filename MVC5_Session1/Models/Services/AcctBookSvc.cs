@@ -1,21 +1,24 @@
-﻿using System;
+﻿using MVC5_Session1.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
 namespace MVC5_Session1.Models
 {
-    public class AcctBookSvc
+    public class AcctBookSvc : Repository<AccountBook>
     {
-        private MoneyEntity _db;
-        public AcctBookSvc()
+        private readonly IRepository<AccountBook> _acctRep;
+
+
+        public AcctBookSvc(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            _db = new MoneyEntity();
+            _acctRep = new Repository<AccountBook>(unitOfWork);
         }
 
         public List<MoneyRecordViewModel> getRealData()
         {
-            List<MoneyRecordViewModel> model = _db.AccountBook
+            List<MoneyRecordViewModel> model = _acctRep.LookupAll()
                 .Take(5)
                 .Select(a => new MoneyRecordViewModel
                 {
@@ -32,7 +35,7 @@ namespace MVC5_Session1.Models
         /// <returns></returns>
         public IEnumerable<AccountBook> All()
         {
-            return _db.AccountBook.ToList();
+            return _acctRep.LookupAll();
         }
 
         /// <summary>
@@ -42,40 +45,40 @@ namespace MVC5_Session1.Models
         /// <returns></returns>
         public AccountBook Find(Guid id)
         {
-            return _db.AccountBook.Find(id);
+            return _acctRep.GetSingle(a => a.Id == id);
         }
 
         /// <summary>
         /// 新增一筆紀錄
         /// </summary>
-        /// <param name="target"></param>
-        public void Add(AccountBook target)
+        /// <param name="entity"></param>
+        public void Add(AccountBook entity)
         {
-            target.Dateee = DateTime.Now;
-            _db.AccountBook.Add(target);
+            entity.Dateee = DateTime.Now;
+            _acctRep.Create(entity);
         }
 
         /// <summary>
         /// 修改一筆紀錄
         /// </summary>
         /// <param name="pageData"></param>
-        /// <param name="target"></param>
-        public void Edit(AccountBook pageData,AccountBook target)
+        /// <param name="entity"></param>
+        public void Edit(AccountBook pageData,AccountBook entity)
         {
-            target.Amounttt = pageData.Amounttt;
-            target.Categoryyy = pageData.Categoryyy;
-            target.Dateee = DateTime.Now;
-            target.Remarkkk = pageData.Remarkkk;
+            entity.Amounttt = pageData.Amounttt;
+            entity.Categoryyy = pageData.Categoryyy;
+            entity.Dateee = DateTime.Now;
+            entity.Remarkkk = pageData.Remarkkk;
 
         }
 
         /// <summary>
         /// 刪除一筆紀錄
         /// </summary>
-        /// <param name="target"></param>
-        public void Delete(AccountBook target)
+        /// <param name="entity"></param>
+        public void Delete(AccountBook entity)
         {
-            _db.AccountBook.Remove(target);
+            _acctRep.Remove(entity);
         }
 
         /// <summary>
@@ -83,7 +86,7 @@ namespace MVC5_Session1.Models
         /// </summary>
         public void Save()
         {
-            _db.SaveChanges();
+            _acctRep.Commit();
         }
     }
 }
