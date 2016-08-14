@@ -200,8 +200,9 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutMoneyTemplate.cshtml" />
-    <Content Include="Views\Home\_PartialMoneySearch.cshtml" />
+    <Content Include="Views\Home\_PartialMoneyForm.cshtml" />
     <Content Include="Views\Home\MoneyList.cshtml" />
+    <Content Include="Views\Home\AcctBook.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

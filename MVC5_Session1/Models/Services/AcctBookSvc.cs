@@ -19,7 +19,6 @@ namespace MVC5_Session1.Models
         public List<MoneyRecordViewModel> getRealData()
         {
             List<MoneyRecordViewModel> model = _acctRep.LookupAll()
-                .Take(5)
                 .Select(a => new MoneyRecordViewModel
                 {
                     amount = a.Amounttt,
