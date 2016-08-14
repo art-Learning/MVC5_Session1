@@ -32,6 +32,38 @@ namespace MVC5_Session1.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 方案一：氣滿紅血招式放大絕
+        /// </summary>
+        /// <param name="frm">表單傳送資料</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AcctBook(FormCollection frm)
+        {
+            
+            bool isVerifySuccess = true;
+            int frmMoney, frmCategory;
+            DateTime frmDate;
+            if (!Int32.TryParse(frm["money"], out frmMoney)) { isVerifySuccess = false; }
+            if(!DateTime.TryParse(frm["date"], out frmDate)) { isVerifySuccess = false; }
+            if(!Int32.TryParse(frm["category"], out frmCategory)) { isVerifySuccess = false; }
+            if (String.IsNullOrEmpty(frm["description"])) { isVerifySuccess = false; }
+
+            if (isVerifySuccess)
+            {
+                string frmDescribe = frm["description"];
+                AccountBook target = new AccountBook();
+                target.Id = Guid.NewGuid();
+                target.Amounttt = frmMoney;
+                target.Dateee = frmDate;
+                target.Categoryyy = frmCategory;
+                target.Remarkkk = frmDescribe;
+                _acctSvc.Add(target);
+                _acctSvc.Save();
+            }
+            
+            return View();
+        }
 
         public ActionResult Contact()
         {

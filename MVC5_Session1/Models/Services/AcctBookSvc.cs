@@ -24,7 +24,8 @@ namespace MVC5_Session1.Models
                     amount = a.Amounttt,
                     createDts = a.Dateee,
                     moneyType = (MoneyType)(a.Categoryyy + 1)  //Enum:1,2 Db:0,1
-                }).ToList();
+                }).OrderByDescending(a=>a.createDts)
+                .ToList();
             return model;
         }
 
