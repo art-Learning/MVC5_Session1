@@ -1,0 +1,36 @@
+﻿@model MVC5_Session1.Models.ViewModel.MoneyFormViewModel
+
+<div class="well">
+    @using (Html.BeginForm("AcctBook2","Home",FormMethod.Post,new { @class="form-horizontal"}))
+    {
+        <div class="form-group">
+            @Html.LabelFor(a=>a.category,htmlAttributes: new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownList("category", (IEnumerable<SelectListItem>)ViewData["ddl"], new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(a => a.money, htmlAttributes: new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(a => a.money, new { htmlAttributes = new { @class = "form-control" ,placeholder = "金額" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(a => a.date, htmlAttributes: new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(a => a.date, new { htmlAttributes = new { @class = "form-control", placeholder = "日期" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(a => a.description, htmlAttributes: new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextAreaFor(a=>a.description, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-8 col-sm-4">
+                <button type="submit" class="btn btn-default">送出</button>
+            </div>
+        </div>
+    }
+</div>

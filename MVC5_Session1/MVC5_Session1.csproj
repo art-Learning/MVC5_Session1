@@ -179,6 +179,8 @@
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -208,6 +210,8 @@
     <Content Include="App_Code\AcctBookList.cshtml" />
     <Content Include="Views\Home\AcctBook2.cshtml" />
     <Content Include="Views\Home\_PartialMoneyForm2.cshtml" />
+    <Content Include="Views\Home\AcctBook3.cshtml" />
+    <Content Include="Views\Home\_PartialMoneyForm3.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
