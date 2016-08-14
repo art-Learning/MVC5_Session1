@@ -137,6 +137,7 @@
     </Compile>
     <Compile Include="Models\DbModel\AccountBook.cs" />
     <Compile Include="Models\DbModel\MoneyEntity.cs" />
+    <Compile Include="Models\ViewModel\MoneyFormViewModel.cs" />
     <Compile Include="Models\ViewModel\MoneyRecordViewModel.cs" />
     <Compile Include="Models\Enum\MoneyTypeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -204,6 +205,8 @@
     <Content Include="Views\Home\MoneyList.cshtml" />
     <Content Include="Views\Home\AcctBook.cshtml" />
     <Content Include="App_Code\AcctBookList.cshtml" />
+    <Content Include="Views\Home\AcctBook2.cshtml" />
+    <Content Include="Views\Home\_PartialMoneyForm2.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

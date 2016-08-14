@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using MVC5_Session1.Models.ViewModel;
 
 namespace MVC5_Session1.Models
 {
@@ -47,7 +48,7 @@ namespace MVC5_Session1.Models
         internal AccountBook ConvToObjByFrm(FormCollection frm)
         {
             AccountBook target = null;
-            bool isVerifySuccess = this.chkFormData(frm);
+            bool isVerifySuccess = this.chkData(frm);
             if (isVerifySuccess)
             {
                 int frmMoney, frmCategory;
@@ -67,11 +68,32 @@ namespace MVC5_Session1.Models
             return target;
         }
         /// <summary>
+        /// 將表單資料的ViewModel塞進記帳本物件
+        /// </summary>
+        /// <param name="vm">表單VM</param>
+        /// <returns>驗證通過返回物件，失敗返回null</returns>
+        public AccountBook ConvToObjByVm(MoneyFormViewModel vm)
+        {
+            AccountBook target = null;
+            bool isVerifySuccess = this.chkData(vm);
+            if (isVerifySuccess)
+            {
+                target = new AccountBook();
+                target.Id = Guid.NewGuid();
+                target.Amounttt = vm.money;
+                target.Dateee = vm.date;
+                target.Categoryyy = vm.category;
+                target.Remarkkk = vm.description;
+            }
+            return target;
+        }
+
+        /// <summary>
         /// 透過FormColletcion接資料的輸入驗證
         /// </summary>
         /// <param name="frm">表單資料</param>
         /// <returns></returns>
-        public bool chkFormData(FormCollection frm)
+        public bool chkData(FormCollection frm)
         {
             //TODO:金額僅允許正整數
             //TODO:日期不得大於今天
@@ -85,6 +107,22 @@ namespace MVC5_Session1.Models
             if (String.IsNullOrEmpty(frm["description"])) { isVerifySuccess = false; }
             return isVerifySuccess;
         }
+        /// <summary>
+        /// 透過VM接資料的輸入驗證
+        /// </summary>
+        /// <param name="vm">透過表單接到的VM</param>
+        /// <returns></returns>
+        public bool chkData(MoneyFormViewModel vm)
+        {
+            //TODO:金額僅允許正整數
+            //TODO:日期不得大於今天
+            //TODO:備註最多100字元，必填
+            bool isVerifySuccess = true;
+            
+            return isVerifySuccess;
+        }
+
+
 
         /// <summary>
         /// 取得一筆紀錄
@@ -102,7 +140,6 @@ namespace MVC5_Session1.Models
         /// <param name="entity"></param>
         public void Add(AccountBook entity)
         {
-            entity.Dateee = DateTime.Now;
             _acctRep.Create(entity);
         }
 
@@ -115,9 +152,8 @@ namespace MVC5_Session1.Models
         {
             entity.Amounttt = pageData.Amounttt;
             entity.Categoryyy = pageData.Categoryyy;
-            entity.Dateee = DateTime.Now;
+            entity.Dateee = pageData.Dateee;
             entity.Remarkkk = pageData.Remarkkk;
-
         }
 
         /// <summary>

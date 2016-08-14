@@ -1,4 +1,5 @@
 ﻿using MVC5_Session1.Models;
+using MVC5_Session1.Models.ViewModel;
 using MVC5_Session1.Repositories;
 using System;
 using System.Collections.Generic;
@@ -47,6 +48,33 @@ namespace MVC5_Session1.Controllers
                 _acctSvc.Save();
             }
             return View();
+        }
+
+        public ActionResult AcctBook2()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 方案二：用ViewModel接資料
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AcctBook2(
+            [Bind(Include ="category,money,date,description")]
+            MoneyFormViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                AccountBook target = _acctSvc.ConvToObjByVm(vm);
+                if (target != null)
+                {
+                    _acctSvc.Add(target);
+                    _acctSvc.Save();
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(vm);
         }
 
         public ActionResult Contact()
