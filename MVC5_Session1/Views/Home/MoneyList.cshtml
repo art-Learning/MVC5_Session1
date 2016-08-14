@@ -19,7 +19,7 @@
                 i += 1;
                 <tr>
                     <td>@i</td>
-                    <td>@getTypeName(rec.moneyType)</td>
+                    <td>@AcctBookList.getTypeName(rec.moneyType)</td>
                     <td>@rec.createDts.ToString("yyyy-MM-dd")</td>
                     <td>@rec.amount.ToString("#,#")</td>
                 </tr>
@@ -28,12 +28,4 @@
     </div>
 </div>
 
-@helper getTypeName(MoneyType type)
-{
-    switch (type)
-    {
-        case MoneyType.Income:<span class="text-danger">收入</span>; break;
-    case MoneyType.Pay:<span class="text-primary">支出</span>; break;
-    default:<text>--</text>break;
-    }
-}
+

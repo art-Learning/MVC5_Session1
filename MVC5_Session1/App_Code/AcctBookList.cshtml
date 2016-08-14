@@ -1,0 +1,11 @@
+﻿@using MVC5_Session1.Models
+
+@helper getTypeName(MoneyType type)
+{
+    switch (type)
+    {
+        case MoneyType.Income:<span class="text-danger">收入</span>; break;
+        case MoneyType.Pay:<span class="text-primary">支出</span>; break;
+        default:<text>--</text>break;
+    }
+}

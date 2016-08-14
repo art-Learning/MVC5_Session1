@@ -203,6 +203,7 @@
     <Content Include="Views\Home\_PartialMoneyForm.cshtml" />
     <Content Include="Views\Home\MoneyList.cshtml" />
     <Content Include="Views\Home\AcctBook.cshtml" />
+    <Content Include="App_Code\AcctBookList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
