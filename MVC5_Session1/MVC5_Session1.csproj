@@ -212,6 +212,8 @@
     <Content Include="Views\Home\_PartialMoneyForm2.cshtml" />
     <Content Include="Views\Home\AcctBook3.cshtml" />
     <Content Include="Views\Home\_PartialMoneyForm3.cshtml" />
+    <Content Include="Views\Home\AjaxPost.cshtml" />
+    <Content Include="Views\Home\_PartialMoneyList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

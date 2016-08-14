@@ -25,6 +25,7 @@
                     <li><a href="@Url.Action("Index","Home")">首頁</a>
                     <li><a href="@Url.Action("AcctBook","Home")">記帳本(frmCollection)</a>
                     <li><a href="@Url.Action("AcctBook2","Home")">記帳本(viewModel)</a>
+                    <li><a href="@Url.Action("AcctBook3","Home")">記帳本(VM+AJAX)</a>
                 </ul>
             </div>
         </div>
@@ -40,5 +41,6 @@
     @Scripts.Render("~/bundles/bootstrap")
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"></script>
+    @RenderSection("pageScript", required: false)
 </body>
 </html>

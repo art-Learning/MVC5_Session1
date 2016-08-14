@@ -5,3 +5,14 @@
 <div id="ajax">
     @Html.Action("MoneyList")
 </div>
+@section pageScript{
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+        function cleanUpFrm() {
+            $('#money').val('');
+            $('#description').val('');
+            $('#date').val('');
+            $('#category').prop('selectedIndex', 0);
+        }
+</script>
+    }

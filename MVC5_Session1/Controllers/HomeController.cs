@@ -99,6 +99,22 @@ namespace MVC5_Session1.Controllers
             ViewData["ddl"] = createFormDropDownList();
             return View();
         }
+        [HttpPost]
+        public ActionResult AjaxPost([Bind(Include ="category,money,date,description")] MoneyFormViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                AccountBook target = _acctSvc.ConvToObjByVm(vm);
+                if (target != null)
+                {
+                    _acctSvc.Add(target);
+                    _acctSvc.Save();
+                }
+            }
+
+            var model = _acctSvc.getRealData();
+            return View(model);
+        }
 
 
         public ActionResult Contact()
@@ -110,7 +126,6 @@ namespace MVC5_Session1.Controllers
         [ChildActionOnly]
         public ActionResult MoneyList()
         {
-            //TODO:未來可能要接收搜尋引擎參數進行查詢動作
             var model = _acctSvc.getRealData();
             return View(model);
         }
