@@ -40,28 +40,12 @@ namespace MVC5_Session1.Controllers
         [HttpPost]
         public ActionResult AcctBook(FormCollection frm)
         {
-            
-            bool isVerifySuccess = true;
-            int frmMoney, frmCategory;
-            DateTime frmDate;
-            if (!Int32.TryParse(frm["money"], out frmMoney)) { isVerifySuccess = false; }
-            if(!DateTime.TryParse(frm["date"], out frmDate)) { isVerifySuccess = false; }
-            if(!Int32.TryParse(frm["category"], out frmCategory)) { isVerifySuccess = false; }
-            if (String.IsNullOrEmpty(frm["description"])) { isVerifySuccess = false; }
-
-            if (isVerifySuccess)
+            AccountBook target = _acctSvc.ConvToObjByFrm(frm);
+            if (target != null)
             {
-                string frmDescribe = frm["description"];
-                AccountBook target = new AccountBook();
-                target.Id = Guid.NewGuid();
-                target.Amounttt = frmMoney;
-                target.Dateee = frmDate;
-                target.Categoryyy = frmCategory;
-                target.Remarkkk = frmDescribe;
                 _acctSvc.Add(target);
                 _acctSvc.Save();
             }
-            
             return View();
         }
 
