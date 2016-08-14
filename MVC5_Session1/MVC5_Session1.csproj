@@ -137,6 +137,7 @@
     </Compile>
     <Compile Include="Models\DbModel\AccountBook.cs" />
     <Compile Include="Models\DbModel\MoneyEntity.cs" />
+    <Compile Include="Models\ViewModel\MoneyDDL.cs" />
     <Compile Include="Models\ViewModel\MoneyFormViewModel.cs" />
     <Compile Include="Models\ViewModel\MoneyRecordViewModel.cs" />
     <Compile Include="Models\Enum\MoneyTypeEnum.cs" />

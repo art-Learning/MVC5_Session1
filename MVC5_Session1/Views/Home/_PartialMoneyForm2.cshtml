@@ -1,31 +1,30 @@
-﻿<div class="well">
-    <form class="form-horizontal" action="@Url.Action("AcctBook2","Home")" method="post">
+﻿@model MVC5_Session1.Models.ViewModel.MoneyFormViewModel
+
+<div class="well">
+    @using (Html.BeginForm("AcctBook2","Home",FormMethod.Post,new { @class="form-horizontal"}))
+    {
         <div class="form-group">
-            <label for="category" class="col-sm-2 control-label">類別</label>
+            @Html.LabelFor(a=>a.category,htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                <select id="category" name="category" class="form-control">
-                    <option value="" selected>請選擇</option>
-                    <option value="1">支出</option>
-                    <option value="0">收入</option>
-                </select>
+                @Html.DropDownList("category", (IEnumerable<SelectListItem>)ViewData["ddl"], new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
-            <label for="money" class="col-sm-2 control-label">金額</label>
+            @Html.LabelFor(a => a.money, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="money" name="money" placeholder="金額">
+                @Html.EditorFor(a => a.money, new { htmlAttributes = new { @class = "form-control" ,placeholder = "金額" } })
             </div>
         </div>
         <div class="form-group">
-            <label for="date" class="col-sm-2 control-label">日期</label>
+            @Html.LabelFor(a => a.date, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="date" name="date" placeholder="日期">
+                @Html.EditorFor(a => a.date, new { htmlAttributes = new { @class = "form-control", placeholder = "日期" } })
             </div>
         </div>
         <div class="form-group">
-            <label for="description" class="col-sm-2 control-label">備註</label>
+            @Html.LabelFor(a => a.description, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                <textarea class="form-control" id="description" name="description"></textarea>
+                @Html.TextAreaFor(a=>a.description, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
@@ -33,5 +32,5 @@
                 <button type="submit" class="btn btn-default">送出</button>
             </div>
         </div>
-    </form>
+    }
 </div>

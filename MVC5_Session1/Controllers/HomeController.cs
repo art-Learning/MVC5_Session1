@@ -52,8 +52,23 @@ namespace MVC5_Session1.Controllers
 
         public ActionResult AcctBook2()
         {
+            ViewData["ddl"] = createFormDropDownList();
+
             return View();
         }
+        /// <summary>
+        /// 製作記帳本表單的下拉選單
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<SelectListItem> createFormDropDownList()
+        {
+            var options = new List<MoneyDDL>();
+            options.Add(new MoneyDDL() { Text = "請選擇", Value = "" });
+            options.Add(new MoneyDDL() { Text = "支出", Value = "1" });
+            options.Add(new MoneyDDL() { Text = "收入", Value = "0" });
+            return new SelectList(options, "Value", "Text");
+        }
+
         /// <summary>
         /// 方案二：用ViewModel接資料
         /// </summary>
@@ -74,6 +89,7 @@ namespace MVC5_Session1.Controllers
                     return RedirectToAction("Index");
                 }
             }
+            ViewData["ddl"] = createFormDropDownList();
             return View(vm);
         }
 
