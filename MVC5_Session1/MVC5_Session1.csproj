@@ -130,6 +130,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Filter\AfterToday.cs" />
     <Compile Include="Models\Metadata\MoneyFormMetadata.cs" />
     <Compile Include="Models\Services\AcctBookSvc.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -217,9 +218,7 @@
     <Content Include="Views\Home\AjaxPost.cshtml" />
     <Content Include="Views\Home\_PartialMoneyList.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Filter\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

@@ -1,14 +1,17 @@
-﻿using System;
+﻿using MVC5_Session1.Filter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MVC5_Session1.Models.ViewModel
 {
     [MetadataType(typeof(MoneyFormMetadata))]
-    public partial class MoneyFormViewModel
+    public partial class MoneyFormViewModel 
     {
+
         private class MoneyFormMetadata
         {
             //RULE01:所有欄位必填
@@ -22,6 +25,7 @@ namespace MVC5_Session1.Models.ViewModel
 
             [Display(Name = "日期")]
             [Required(ErrorMessage = "請輸入{0}")]
+            [AfterToday(ErrorMessage ="{0}不可超過今天")]
             public DateTime date { get; set; }
 
             [Display(Name = "金額")]
