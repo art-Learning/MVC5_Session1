@@ -13,24 +13,28 @@
             @Html.LabelFor(a=>a.category,htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
                 @Html.DropDownList("category", (IEnumerable<SelectListItem>)ViewData["ddl"], new { @class = "form-control" })
+                @Html.ValidationMessageFor(a=>a.category)
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(a => a.money, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
                 @Html.EditorFor(a => a.money, new { htmlAttributes = new { @class = "form-control" ,placeholder = "金額" } })
+                @Html.ValidationMessageFor(a=>a.money)
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(a => a.date, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
                 @Html.EditorFor(a => a.date, new { htmlAttributes = new { @class = "form-control", placeholder = "日期" } })
+                @Html.ValidationMessageFor(a => a.date)
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(a => a.description, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
                 @Html.TextAreaFor(a=>a.description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.description)
             </div>
         </div>
         <div class="form-group">
