@@ -1,7 +1,7 @@
 ﻿@model MVC5_Session1.Models.ViewModel.MoneyFormViewModel
 
 <div class="well">
-    @using (Ajax.BeginForm("ajaxPost","",new AjaxOptions()
+    @using (Ajax.BeginForm("ajaxPost","Home",new AjaxOptions()
     {
         UpdateTargetId="ajax",
         HttpMethod="post",
