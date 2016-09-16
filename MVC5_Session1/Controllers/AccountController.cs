@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MVC5_Session1.Models;
+using System.Collections.Generic;
 
 namespace MVC5_Session1.Controllers
 {
@@ -66,29 +67,37 @@ namespace MVC5_Session1.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(model);
+                //管理者登入
+                if (model.Email == "admin@test.com" && model.Password == "123456")
+                {
+                    createClaimsIdent(model,"admin");
+                }
+                //一般使用者登入
+                createClaimsIdent(model,"user");
+                return RedirectToLocal(returnUrl);
             }
 
-            // 這不會計算為帳戶鎖定的登入失敗
-            // 若要啟用密碼失敗來觸發帳戶鎖定，請變更為 shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "登入嘗試失試。");
-                    return View(model);
-            }
+            ModelState.AddModelError("", "登入嘗試失試。");
+            return View(model);
+
+        }
+
+        private void createClaimsIdent(LoginViewModel model,string roleName)
+        {
+            var name = (roleName == "admin") ? "寫死的管理者" : model.Email;
+            var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name,name));
+            claims.Add(new Claim(ClaimTypes.Email, model.Email));
+            claims.Add(new Claim(ClaimTypes.Role, roleName));
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, "1"));
+            var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
+            var ctx = Request.GetOwinContext();
+            var authenticationManager = ctx.Authentication;
+            authenticationManager.SignIn(identity);
         }
 
         //
