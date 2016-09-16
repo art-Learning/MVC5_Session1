@@ -16,6 +16,9 @@ namespace MVC5_Session1.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private const string ROLE_ADMIN = "admin";
+        private const string ROLE_USER = "user";
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -71,13 +74,24 @@ namespace MVC5_Session1.Controllers
         {
             if (ModelState.IsValid)
             {
-                //管理者登入
+                //驗證帳號是否存在
+                if (!isExistAccount(model))
+                {
+                    ModelState.AddModelError("", "登入嘗試失試。");
+                    return View(model);
+                }
+
+                //建立身分Claims
                 if (model.Email == "admin@test.com" && model.Password == "123456")
                 {
-                    createClaimsIdent(model,"admin");
+                    createClaimsIdent(model,ROLE_ADMIN);       //管理者登入
                 }
-                //一般使用者登入
-                createClaimsIdent(model,"user");
+                else
+                {
+                    createClaimsIdent(model, ROLE_USER);       //一般使用者登入
+                }
+
+                
                 return RedirectToLocal(returnUrl);
             }
 
@@ -85,7 +99,22 @@ namespace MVC5_Session1.Controllers
             return View(model);
 
         }
+        /// <summary>
+        /// 驗證帳號是否存在
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private bool isExistAccount(LoginViewModel model)
+        {
+            //TODO:要從資料庫比對帳號
+            return true;
+        }
 
+        /// <summary>
+        /// 建立身分Claims
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="roleName"></param>
         private void createClaimsIdent(LoginViewModel model,string roleName)
         {
             var name = (roleName == "admin") ? "寫死的管理者" : model.Email;
