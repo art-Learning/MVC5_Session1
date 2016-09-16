@@ -8,6 +8,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="http://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    @RenderSection("pageCss",required:false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">

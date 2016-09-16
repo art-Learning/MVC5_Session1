@@ -21,3 +21,8 @@ $.validator.addMethod("aftertoday", function (value, element, param) {
     }
 });
 $.validator.unobtrusive.adapters.addSingleVal("aftertoday", "input");
+
+$('.datepicker').pickadate({
+    formatSubmit: 'yyyy-mm-dd',
+    format: 'yyyy-mm-dd'
+});
